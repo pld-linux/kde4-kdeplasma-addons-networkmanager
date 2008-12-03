@@ -2,16 +2,16 @@
 
 Summary:	Plasma applet that controls network via NetworkManager backend
 Name:		kde4-kdeplasma-addons-networkmanager
-Version:	0
+Version:	4.1.81
 Release:	0.%{snap}.1
 License:	GPL v2
 Group:		X11/Applications
 # svn co svn://anonsvn.kde.org/home/kde/trunk/playground/base/plasma/applets/networkmanager/
 Source0:	%{name}-%{snap}.tar.bz2
 # Source0-md5:	e9c66a8d882eb2b67b24f9bb004cdff9
-BuildRequires:	NetworkManager-devel
-BuildRequires:	cmake
-BuildRequires:	kde4-kdebase-workspace-devel
+BuildRequires:	NetworkManager-devel >= 0.7.0
+BuildRequires:	cmake >= 2.6.2
+BuildRequires:	kde4-kdebase-workspace-devel >= %{version}
 BuildRequires:	rpmbuild(macros) >= 1.293
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -29,7 +29,6 @@ cd build
 %if "%{_lib}" != "lib"
 	-DLIB_SUFFIX=64 \
 %endif
-	-DQT_QMAKE_EXECUTABLE=%{_bindir}/qmake-qt4 \
 	../
 
 %{__make}
