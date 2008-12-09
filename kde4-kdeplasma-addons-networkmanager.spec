@@ -2,7 +2,7 @@
 
 Summary:	Plasma applet that controls network via NetworkManager backend
 Name:		kde4-kdeplasma-addons-networkmanager
-Version:	4.1.81
+Version:	4.1.82
 Release:	0.%{snap}.1
 License:	GPL v2
 Group:		X11/Applications
