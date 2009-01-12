@@ -1,14 +1,14 @@
-%define		snap	893989
+%define		snap	910094
 
 Summary:	Plasma applet that controls network via NetworkManager backend
 Name:		kde4-kdeplasma-addons-networkmanager
-Version:	4.1.82
+Version:	4.1.96
 Release:	0.%{snap}.1
 License:	GPL v2
 Group:		X11/Applications
 # svn co svn://anonsvn.kde.org/home/kde/trunk/playground/base/plasma/applets/networkmanager/
 Source0:	%{name}-%{snap}.tar.bz2
-# Source0-md5:	829003eae5116c79b59d22e72872ddef
+# Source0-md5:	e72325d59a41f06fe48e45efb108dda6
 BuildRequires:	NetworkManager-devel >= 0.7.0
 BuildRequires:	cmake >= 2.6.2
 BuildRequires:	kde4-kdebase-workspace-devel >= %{version}
