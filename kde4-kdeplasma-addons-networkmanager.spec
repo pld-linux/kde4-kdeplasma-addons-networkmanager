@@ -1,14 +1,17 @@
-%define		snap	910094
+# Conditional build:
+%bcond_with	verbose		# verbose build
+
+%define		snap	927056
 
 Summary:	Plasma applet that controls network via NetworkManager backend
 Name:		kde4-kdeplasma-addons-networkmanager
-Version:	4.1.96
+Version:	4.2.0
 Release:	0.%{snap}.1
 License:	GPL v2
 Group:		X11/Applications
 # svn co svn://anonsvn.kde.org/home/kde/trunk/playground/base/plasma/applets/networkmanager/
 Source0:	%{name}-%{snap}.tar.bz2
-# Source0-md5:	e72325d59a41f06fe48e45efb108dda6
+# Source0-md5:	162f56be60972be984c6b147bb016831
 BuildRequires:	NetworkManager-devel >= 0.7.0
 BuildRequires:	cmake >= 2.6.2
 BuildRequires:	kde4-kdebase-workspace-devel >= %{version}
@@ -26,6 +29,8 @@ install -d build
 cd build
 %cmake \
 	-DCMAKE_INSTALL_PREFIX=%{_prefix} \
+	%{?with_verbose:-DCMAKE_VERBOSE_MAKEFILE=true} \
+	-DDBUS_SYSTEM_POLICY_DIR=/etc/dbus-1/system.d \
 %if "%{_lib}" != "lib"
 	-DLIB_SUFFIX=64 \
 %endif
@@ -45,8 +50,9 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc DESIGN TODO
-%{_datadir}/apps/desktoptheme/default/networkmanager
-%{_datadir}/apps/knetworkmanager
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/dbus-1/system.d/*.conf
+%{_datadir}/apps/desktoptheme/default/networkmanagement
+%{_datadir}/apps/networkmanagement
 %{_iconsdir}/oxygen/32x32/actions/accesspoint.png
 %{_datadir}/kde4/services/*.desktop
 %{_datadir}/kde4/services/kded/*.desktop
@@ -60,9 +66,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libknmui.so
 %attr(755,root,root) %{_libdir}/libknmui.so.4
 %attr(755,root,root) %{_libdir}/libknmui.so.4.2.0
-%attr(755,root,root) %{_libdir}/kde4/kcm_knetworkmanager.so
+%attr(755,root,root) %{_libdir}/kde4/kcm_networkmanagement.so
 %attr(755,root,root) %{_libdir}/kde4/kded_knetworkmanager.so
-%attr(755,root,root) %{_libdir}/kde4/knetworkmanager4_openvpnui.so
-%attr(755,root,root) %{_libdir}/kde4/knetworkmanager4_vpncui.so
-%attr(755,root,root) %{_libdir}/kde4/plasma_applet_networkmanager.so
-%attr(755,root,root) %{_libdir}/kde4/libexec/knetworkmanager_configshell
+%attr(755,root,root) %{_libdir}/kde4/networkmanagement_openvpnui.so
+%attr(755,root,root) %{_libdir}/kde4/networkmanagement_vpncui.so
+%attr(755,root,root) %{_libdir}/kde4/plasma_applet_networkmanagement.so
+%attr(755,root,root) %{_libdir}/kde4/libexec/networkmanagement_configshell
