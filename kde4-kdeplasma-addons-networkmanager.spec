@@ -2,6 +2,7 @@
 %bcond_with	verbose		# verbose build
 
 %define		snap	927056
+%define		qtver	4.4.3
 
 Summary:	Plasma applet that controls network via NetworkManager backend
 Name:		kde4-kdeplasma-addons-networkmanager
@@ -13,6 +14,12 @@ Group:		X11/Applications
 Source0:	%{name}-%{snap}.tar.bz2
 # Source0-md5:	162f56be60972be984c6b147bb016831
 BuildRequires:	NetworkManager-devel >= 0.7.0
+BuildRequires:	Qt3Support-devel >= %{qtver}
+BuildRequires:	QtCore-devel >= %{qtver}
+BuildRequires:	QtDBus-devel >= %{qtver}
+BuildRequires:	QtGui-devel >= %{qtver}
+BuildRequires:	QtNetwork-devel >= %{qtver}
+BuildRequires:	QtXml-devel >= %{qtver}
 BuildRequires:	cmake >= 2.6.2
 BuildRequires:	kde4-kdebase-workspace-devel >= %{version}
 BuildRequires:	rpmbuild(macros) >= 1.293
