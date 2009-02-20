@@ -38,7 +38,7 @@ cd build
 	-DCMAKE_INSTALL_PREFIX=%{_prefix} \
 	%{?with_verbose:-DCMAKE_VERBOSE_MAKEFILE=true} \
 	-DDBUS_SYSTEM_POLICY_DIR=/etc/dbus-1/system.d \
-	-DCMAKE_BUILD_TYPE=release \
+	-DCMAKE_BUILD_TYPE=%{!?debug:release}%{?debug:debug} \
 %if "%{_lib}" != "lib"
 	-DLIB_SUFFIX=64 \
 %endif
