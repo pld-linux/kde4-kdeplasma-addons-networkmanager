@@ -1,18 +1,18 @@
 # Conditional build:
 %bcond_with	verbose		# verbose build
 
-%define		snap	927056
-%define		qtver	4.4.3
+%define		snap	949018
+%define		qtver	4.5.0
 
 Summary:	Plasma applet that controls network via NetworkManager backend
 Name:		kde4-kdeplasma-addons-networkmanager
-Version:	4.2.0
-Release:	0.%{snap}.2
+Version:	4.2.2
+Release:	0.%{snap}.1
 License:	GPL v2
 Group:		X11/Applications
 # svn co svn://anonsvn.kde.org/home/kde/trunk/playground/base/plasma/applets/networkmanager/
 Source0:	%{name}-%{snap}.tar.bz2
-# Source0-md5:	162f56be60972be984c6b147bb016831
+# Source0-md5:	e6c2ede288b287a459c1bc9aac0f215f
 BuildRequires:	NetworkManager-devel >= 0.7.0
 BuildRequires:	Qt3Support-devel >= %{qtver}
 BuildRequires:	QtCore-devel >= %{qtver}
@@ -38,7 +38,6 @@ cd build
 	-DCMAKE_INSTALL_PREFIX=%{_prefix} \
 	%{?with_verbose:-DCMAKE_VERBOSE_MAKEFILE=true} \
 	-DDBUS_SYSTEM_POLICY_DIR=/etc/dbus-1/system.d \
-	-DCMAKE_BUILD_TYPE=%{!?debug:release}%{?debug:debug} \
 %if "%{_lib}" != "lib"
 	-DLIB_SUFFIX=64 \
 %endif
