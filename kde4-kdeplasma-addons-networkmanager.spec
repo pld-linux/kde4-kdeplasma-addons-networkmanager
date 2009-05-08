@@ -1,7 +1,7 @@
 # Conditional build:
 %bcond_with	verbose		# verbose build
 
-%define		snap	949018
+%define		snap	965165
 %define		qtver	4.5.0
 
 Summary:	Plasma applet that controls network via NetworkManager backend
@@ -12,7 +12,7 @@ License:	GPL v2
 Group:		X11/Applications
 # svn co svn://anonsvn.kde.org/home/kde/trunk/playground/base/plasma/applets/networkmanager/
 Source0:	%{name}-%{snap}.tar.bz2
-# Source0-md5:	e6c2ede288b287a459c1bc9aac0f215f
+# Source0-md5:	870d9fe692ba29565f03107b329bc7e5
 BuildRequires:	NetworkManager-devel >= 0.7.0
 BuildRequires:	Qt3Support-devel >= %{qtver}
 BuildRequires:	QtCore-devel >= %{qtver}
