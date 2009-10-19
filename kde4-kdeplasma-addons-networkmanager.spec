@@ -35,6 +35,7 @@ Plasma applet that controls network via NetworkManager backend.
 install -d build
 cd build
 %cmake \
+	-DCMAKE_BUILD_TYPE=%{!?debug:Release}%{?debug:Debug} \
 	-DCMAKE_INSTALL_PREFIX=%{_prefix} \
 	%{?with_verbose:-DCMAKE_VERBOSE_MAKEFILE=true} \
 	-DDBUS_SYSTEM_POLICY_DIR=/etc/dbus-1/system.d \
