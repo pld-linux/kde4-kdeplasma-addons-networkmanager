@@ -1,18 +1,20 @@
 # Conditional build:
 %bcond_with	verbose		# verbose build
 
-%define		snap	970120
-%define		qtver	4.5.0
+%define		snap	1062147
+%define		qtver	4.6.0
+%define		origname	networkmanagement
 
 Summary:	Plasma applet that controls network via NetworkManager backend
 Name:		kde4-kdeplasma-addons-networkmanager
-Version:	4.2.3
+Version:	4.3.80
 Release:	0.%{snap}.1
 License:	GPL v2
 Group:		X11/Applications
-# svn co svn://anonsvn.kde.org/home/kde/trunk/playground/base/plasma/applets/networkmanager/
-Source0:	%{name}-%{snap}.tar.bz2
-# Source0-md5:	597aa8a8b1002d18cfe5504c4c3fe5d1
+# svn co svn://anonsvn.kde.org/home/kde/trunk/kdereview/networkmanagement
+Source0:	%{origname}-%{snap}.tar.gz
+# Source0-md5:	437c5733c88dd190e0236bfb9bc84d72
+URL:		http://en.opensuse.org/Projects/KNetworkManager
 BuildRequires:	NetworkManager-devel >= 0.7.0
 BuildRequires:	Qt3Support-devel >= %{qtver}
 BuildRequires:	QtCore-devel >= %{qtver}
@@ -29,7 +31,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Plasma applet that controls network via NetworkManager backend.
 
 %prep
-%setup -q -n %{name}-%{snap}
+%setup -q -n %{origname}-%{snap}
 
 %build
 install -d build
@@ -55,28 +57,39 @@ rm -rf $RPM_BUILD_ROOT
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%post	-p /sbin/ldconfig
+%postun	-p /sbin/ldconfig
+
 %files
 %defattr(644,root,root,755)
 %doc DESIGN TODO
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/dbus-1/system.d/*.conf
-%{_datadir}/apps/desktoptheme/default/networkmanagement
-%{_datadir}/apps/networkmanagement
-%{_iconsdir}/oxygen/32x32/actions/accesspoint.png
-%{_datadir}/kde4/services/*.desktop
-%{_datadir}/kde4/services/kded/*.desktop
-%{_datadir}/kde4/servicetypes/*.desktop
-%attr(755,root,root) %{_libdir}/libknmdbus.so
-%attr(755,root,root) %{_libdir}/libknmdbus.so.4
-%attr(755,root,root) %{_libdir}/libknmdbus.so.4.2.0
-%attr(755,root,root) %{_libdir}/libknmstorage.so
-%attr(755,root,root) %{_libdir}/libknmstorage.so.4
-%attr(755,root,root) %{_libdir}/libknmstorage.so.4.2.0
-%attr(755,root,root) %{_libdir}/libknmui.so
-%attr(755,root,root) %{_libdir}/libknmui.so.4
-%attr(755,root,root) %{_libdir}/libknmui.so.4.2.0
+%attr(755,root,root) %{_bindir}/knetworkmanager
+%attr(755,root,root) %ghost %{_libdir}/libknmclient.so.?
+%attr(755,root,root) %{_libdir}/libknmclient.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libknminternals.so.?
+%attr(755,root,root) %{_libdir}/libknminternals.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libknmservice.so.?
+%attr(755,root,root) %{_libdir}/libknmservice.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libknmui.so.?
+%attr(755,root,root) %{_libdir}/libknmui.so.*.*.*
+%attr(755,root,root) %{_libdir}/libknm_nm.so
+%attr(755,root,root) %{_libdir}/libsolidcontrolfuture.so
 %attr(755,root,root) %{_libdir}/kde4/kcm_networkmanagement.so
-%attr(755,root,root) %{_libdir}/kde4/kded_knetworkmanager.so
 %attr(755,root,root) %{_libdir}/kde4/networkmanagement_openvpnui.so
 %attr(755,root,root) %{_libdir}/kde4/networkmanagement_vpncui.so
 %attr(755,root,root) %{_libdir}/kde4/plasma_applet_networkmanagement.so
 %attr(755,root,root) %{_libdir}/kde4/libexec/networkmanagement_configshell
+%attr(755,root,root) %{_libdir}/kde4/kcm_networkmanagement_tray.so
+%attr(755,root,root) %{_libdir}/kde4/kded_networkmanagement.so
+%attr(755,root,root) %{_libdir}/kde4/networkmanagement_novellvpnui.so
+%attr(755,root,root) %{_libdir}/kde4/networkmanagement_pptpui.so
+%{_datadir}/apps/networkmanagement
+%{_datadir}/kde4/services/*.desktop
+%{_datadir}/kde4/services/kded/*.desktop
+%{_datadir}/kde4/servicetypes/*.desktop
+%{_datadir}/applications/kde4/knetworkmanager.desktop                                                                       
+%{_datadir}/autostart/kde4-knetworkmanager-autostart.desktop
+%{_iconsdir}/oxygen/*x*/devices/network-wireless*.png
+%{_iconsdir}/oxygen/*x*/devices/network-wired-activated.png
+%{_iconsdir}/hicolor/32x32/apps/knetworkmanager.png
