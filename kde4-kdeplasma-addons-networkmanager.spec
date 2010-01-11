@@ -15,14 +15,14 @@ Group:		X11/Applications
 Source0:	%{origname}-%{snap}.tar.gz
 # Source0-md5:	437c5733c88dd190e0236bfb9bc84d72
 URL:		http://en.opensuse.org/Projects/KNetworkManager
-BuildRequires:	NetworkManager-devel >= 0.7.0
+BuildRequires:	NetworkManager-devel >= 0.7.1
 BuildRequires:	Qt3Support-devel >= %{qtver}
 BuildRequires:	QtCore-devel >= %{qtver}
 BuildRequires:	QtDBus-devel >= %{qtver}
 BuildRequires:	QtGui-devel >= %{qtver}
 BuildRequires:	QtNetwork-devel >= %{qtver}
 BuildRequires:	QtXml-devel >= %{qtver}
-BuildRequires:	cmake >= 2.6.2
+BuildRequires:	cmake >= 2.6.3
 BuildRequires:	kde4-kdebase-workspace-devel >= %{version}
 BuildRequires:	rpmbuild(macros) >= 1.293
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
